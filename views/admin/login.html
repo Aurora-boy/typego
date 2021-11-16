@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="renderer" content="webkit" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+		/>
+		<title>登录到博客后台 - Powered by Typecho</title>
+		<meta name="robots" content="noindex, nofollow" />
+		<link rel="stylesheet" href="../../static/admin/css/normalize.css" />
+		<link rel="stylesheet" href="../../static/admin/css/grid.css" />
+		<link rel="stylesheet" href="../../static/admin/css/style.css" />
+	</head>
+	<body>
+		<div class="typecho-login-wrap">
+			<div class="typecho-login">
+				<h1><a href="http://typecho.org" class="i-logo">Typecho</a></h1>
+				<form action="login" method="post" name="login" role="form">
+					<p>
+						<label for="name" class="sr-only">用户名</label>
+						<input
+							type="text"
+							id="name"
+							name="name"
+							value="admin"
+							placeholder="用户名"
+							class="text-l w-100"
+							autofocus
+						/>
+					</p>
+					<p>
+						<label for="password" class="sr-only">密码</label>
+						<input
+							type="password"
+							id="password"
+							name="password"
+							class="text-l w-100"
+							placeholder="密码"
+						/>
+					</p>
+					<p class="submit">
+						<button type="submit" class="btn btn-l w-100 primary">登录</button>
+						<input type="hidden" name="referer" value="referer" />
+					</p>
+					<p>
+						<label for="remember">
+							<input type="checkbox" name="remember" class="checkbox" value="1" id="remember" />
+							下次自动登录
+						</label>
+					</p>
+				</form>
+
+				<p class="more-link">
+					<a href="siteUrl()">返回首页</a>
+					<a href="registerUrl()">用户注册</a>
+				</p>
+			</div>
+		</div>
+	</body>
+</html>
