@@ -1,11 +1,22 @@
 package models
 
 import (
-	"github.com/beego/beego/v2/adapter/orm"
+	"time"
+
+	"github.com/beego/beego/v2/client/orm"
 	"github.com/beego/beego/v2/core/logs"
 	"github.com/beego/beego/v2/server/web"
 	_ "github.com/go-sql-driver/mysql"
 )
+
+type User struct {
+	Id       int
+	Username string
+	Password string
+	Mail     string
+	Created  time.Time
+	Logged   time.Time
+}
 
 func init() {
 	driverName, _ := web.AppConfig.String("driverName")
@@ -29,4 +40,8 @@ func init() {
 	}
 	logs.Info("connect to mysql sucessfully!")
 
+	// register models
+	orm.RegisterModel(new(User))
+	// syncdb
+	orm.RunSyncdb("default", false, true)
 }
