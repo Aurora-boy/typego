@@ -18,23 +18,33 @@ func (this *RegisterController) Get() {
 }
 
 func (this *RegisterController) Post() {
+	username := this.GetString("username")
+	password := this.GetString("password")
+	mail := this.GetString("mail")
+
 	orm := orm.NewOrm()
 
 	user := models.User{}
 
 	// get information from form data
-	user.Username = this.GetString("username")
-	user.Password = this.GetString("password")
-	user.Mail = this.GetString("mail")
-	user.Created = time.Now()
-	user.Logged = time.Now()
+	user.Username = username
+	if orm.Read(&user, "username") != nil {
+		// user didn't in users table
+		user.Password = password
+		user.Mail = mail
+		user.Created = time.Now()
+		user.Logged = time.Now()
 
-	// insert
-	_, err := orm.Insert(&user)
-	if err != nil {
-		logs.Info("Insert error", err)
-		return
+		// insert
+		_, err := orm.Insert(&user)
+		if err != nil {
+			logs.Info("Insert error", err)
+			return
+		}
+		// this.Ctx.WriteString("注册成功")
+	} else {
+		logs.Info("user already exists")
 	}
-	this.Ctx.WriteString("注册成功")
+	this.Redirect("/login", 302)
 
 }
